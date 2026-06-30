@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Cosmic Reading{% endblock %}
+
+{% block content %}
+<div class="report-container" id="report-container">
+    <!-- Loading state until data arrives -->
+    <div class="report-loading" id="report-loading">
+        <p>Loading your cosmic reading...</p>
+    </div>
+    
+    <!-- Report Header -->
+    <header class="report-header hidden" id="report-header">
+        <h1 class="report-title">✧ Your Celestial Reading ✧</h1>
+        <p class="report-for" id="report-name"></p>
+        <p class="report-date" id="report-date"></p>
+    </header>
+    
+    <!-- Zodiac Profile Card -->
+    <section class="report-section card zodiac-card hidden" id="zodiac-section">
+        <div class="card-header">
+            <h2>Your Cosmic Profile</h2>
+        </div>
+        <div class="zodiac-grid">
+            <div class="zodiac-main">
+                <div class="zodiac-symbol-large" id="zodiac-symbol"></div>
+                <h3 class="zodiac-name" id="zodiac-name"></h3>
+                <p class="zodiac-element" id="zodiac-element"></p>
+            </div>
+            <div class="zodiac-details">
+                <div class="detail-item">
+                    <span class="detail-label">Chinese Zodiac</span>
+                    <span class="detail-value" id="chinese-zodiac"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Lucky Number</span>
+                    <span class="detail-value" id="lucky-number"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Lucky Color</span>
+                    <span class="detail-value" id="lucky-color"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Lucky Day</span>
+                    <span class="detail-value" id="lucky-day"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Lucky Gemstone</span>
+                    <span class="detail-value" id="lucky-gemstone"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Lucky Direction</span>
+                    <span class="detail-value" id="lucky-direction"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Life Meters -->
+    <section class="report-section card meters-card hidden" id="meters-section">
+        <div class="card-header">
+            <h2>Life Energy Readings</h2>
+        </div>
+        <div class="meters-grid">
+            <div class="meter-item">
+                <div class="meter-icon">💼</div>
+                <div class="meter-info">
+                    <span class="meter-label">Career</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="meter-career" style="width: 0%"></div>
+                    </div>
+                    <span class="meter-value" id="meter-career-value">0%</span>
+                </div>
+            </div>
+            <div class="meter-item">
+                <div class="meter-icon">❤️</div>
+                <div class="meter-info">
+                    <span class="meter-label">Love</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="meter-love" style="width: 0%"></div>
+                    </div>
+                    <span class="meter-value" id="meter-love-value">0%</span>
+                </div>
+            </div>
+            <div class="meter-item">
+                <div class="meter-icon">💪</div>
+                <div class="meter-info">
+                    <span class="meter-label">Health</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="meter-health" style="width: 0%"></div>
+                    </div>
+                    <span class="meter-value" id="meter-health-value">0%</span>
+                </div>
+            </div>
+            <div class="meter-item">
+                <div class="meter-icon">💰</div>
+                <div class="meter-info">
+                    <span class="meter-label">Finance</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="meter-finance" style="width: 0%"></div>
+                    </div>
+                    <span class="meter-value" id="meter-finance-value">0%</span>
+                </div>
+            </div>
+            <div class="meter-item">
+                <div class="meter-icon">😊</div>
+                <div class="meter-info">
+                    <span class="meter-label">Happiness</span>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="meter-happiness" style="width: 0%"></div>
+                    </div>
+                    <span class="meter-value" id="meter-happiness-value">0%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Personality Overview -->
+    <section class="report-section card hidden" id="personality-section">
+        <div class="card-header">
+            <h2>✧ Personality Overview</h2>
+        </div>
+        <p class="card-content" id="personality-overview"></p>
+    </section>
+    
+    <!-- Strengths & Weaknesses -->
+    <section class="report-section card hidden" id="traits-section">
+        <div class="traits-grid">
+            <div class="trait-column">
+                <h3 class="trait-title strengths-title">✦ Your Strengths</h3>
+                <ul class="trait-list" id="strengths-list"></ul>
+            </div>
+            <div class="trait-column">
+                <h3 class="trait-title weaknesses-title">✦ Areas for Growth</h3>
+                <ul class="trait-list" id="weaknesses-list"></ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hidden Talents -->
+    <section class="report-section card hidden" id="talents-section">
+        <div class="card-header">
+            <h2>✧ Hidden Talents</h2>
+        </div>
+        <div class="talents-grid" id="talents-grid"></div>
+    </section>
+    
+    <!-- Career Suggestions -->
+    <section class="report-section card hidden" id="career-section">
+        <div class="card-header">
+            <h2>✧ Career Guidance</h2>
+        </div>
+        <div class="career-grid" id="career-grid"></div>
+        <div class="education-guidance">
+            <h4>Education Path</h4>
+            <p id="education-guidance"></p>
+        </div>
+    </section>
+    
+    <!-- Financial Outlook -->
+    <section class="report-section card hidden" id="finance-section">
+        <div class="card-header">
+            <h2>✧ Financial Outlook</h2>
+        </div>
+        <p class="card-content" id="financial-outlook"></p>
+    </section>
+    
+    <!-- Relationship Insights -->
+    <section class="report-section card hidden" id="relationship-section">
+        <div class="card-header">
+            <h2>✧ Relationship Insights</h2>
+        </div>
+        <p class="card-content" id="relationship-insights"></p>
+        
+        <div class="compatibility-section">
+            <h4>Marriage Compatibility</h4>
+            <div class="compatibility-grid">
+                <div class="compatible-signs">
+                    <span class="compat-label">Most Compatible</span>
+                    <div class="signs-list" id="compatible-signs"></div>
+                </div>
+                <div class="challenging-signs">
+                    <span class="compat-label">May Need Work</span>
+                    <div class="signs-list" id="challenging-signs"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="family-insights">
+            <h4>Family Life</h4>
+            <p id="family-life"></p>
+        </div>
+    </section>
+    
+    <!-- Health & Wellness -->
+    <section class="report-section card hidden" id="health-section">
+        <div class="card-header">
+            <h2>✧ Health & Wellness</h2>
+        </div>
+        <div class="health-grid">
+            <div class="health-focus">
+                <h4>Focus Areas</h4>
+                <ul id="health-focus-list"></ul>
+            </div>
+            <div class="health-activities">
+                <h4>Recommended Activities</h4>
+                <ul id="health-activities-list"></ul>
+            </div>
+        </div>
+        <div class="wellness-tips">
+            <p id="wellness-tips"></p>
+        </div>
+    </section>
+    
+    <!-- Travel Opportunities -->
+    <section class="report-section card hidden" id="travel-section">
+        <div class="card-header">
+            <h2>✧ Travel Opportunities</h2>
+        </div>
+        <div class="travel-info">
+            <p><strong>Travel Style:</strong> <span id="travel-style"></span></p>
+            <p><strong>Lucky Direction:</strong> <span id="travel-direction"></span></p>
+        </div>
+        <div class="destinations">
+            <h4>Ideal Destinations</h4>
+            <div class="destinations-grid" id="destinations-grid"></div>
+        </div>
+        <p class="travel-tip" id="travel-tip"></p>
+    </section>
+    
+    <!-- Horoscopes -->
+    <section class="report-section card hidden" id="horoscope-section">
+        <div class="card-header">
+            <h2>✧ Your Horoscopes</h2>
+        </div>
+        <div class="horoscope-tabs">
+            <button class="tab-btn active" data-tab="monthly">Monthly</button>
+            <button class="tab-btn" data-tab="yearly">Yearly</button>
+        </div>
+        <div class="horoscope-content">
+            <div class="tab-content active" id="monthly-horoscope"></div>
+            <div class="tab-content" id="yearly-horoscope"></div>
+        </div>
+    </section>
+    
+    <!-- Daily Inspiration -->
+    <section class="report-section card inspiration-card hidden" id="inspiration-section">
+        <div class="inspiration-content">
+            <div class="quote-mark">"</div>
+            <p class="daily-quote" id="daily-quote"></p>
+            <div class="quote-mark closing">"</div>
+        </div>
+        <div class="motivational-advice">
+            <h4>Personal Guidance</h4>
+            <p id="motivational-advice"></p>
+        </div>
+    </section>
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons hidden" id="action-buttons">
+        <button class="action-btn download-btn" id="download-pdf">
+            <span class="btn-icon">📄</span>
+            <span>Download Report as PDF</span>
+        </button>
+        <button class="action-btn new-reading-btn" id="new-reading">
+            <span class="btn-icon">✨</span>
+            <span>Generate New Reading</span>
+        </button>
+    </div>
+    
+    <!-- Disclaimer -->
+    <div class="report-disclaimer hidden" id="report-disclaimer">
+        <p id="disclaimer-text"></p>
+    </div>
+</div>
+{% endblock %}

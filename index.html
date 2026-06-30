@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}Discover Your Cosmic Path{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="zodiac-wheel" aria-hidden="true">
+        <span class="zodiac-icon">♈</span>
+        <span class="zodiac-icon">♉</span>
+        <span class="zodiac-icon">♊</span>
+        <span class="zodiac-icon">♋</span>
+        <span class="zodiac-icon">♌</span>
+        <span class="zodiac-icon">♍</span>
+        <span class="zodiac-icon">♎</span>
+        <span class="zodiac-icon">♏</span>
+        <span class="zodiac-icon">♐</span>
+        <span class="zodiac-icon">♑</span>
+        <span class="zodiac-icon">♒</span>
+        <span class="zodiac-icon">♓</span>
+    </div>
+    
+    <h1 class="main-title">Celestial Insights</h1>
+    <p class="subtitle">Discover the wisdom written in the stars</p>
+</div>
+
+<div class="form-container">
+    <form id="astrology-form" class="astrology-form">
+        <div class="form-section">
+            <h2 class="section-title">✧ Personal Information ✧</h2>
+            
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required 
+                       placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-binary</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship_status">Relationship Status</label>
+                    <select id="relationship_status" name="relationship_status" required>
+                        <option value="">Select status</option>
+                        <option value="single">Single</option>
+                        <option value="in-relationship">In a Relationship</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="widowed">Widowed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">✧ Birth Details ✧</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date_of_birth">Date of Birth</label>
+                    <input type="date" id="date_of_birth" name="date_of_birth" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time_of_birth">Time of Birth</label>
+                    <input type="time" id="time_of_birth" name="time_of_birth" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="place_of_birth">Place of Birth</label>
+                    <input type="text" id="place_of_birth" name="place_of_birth" required
+                           placeholder="City of birth">
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" required
+                           placeholder="Country of birth">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="section-title">✧ Current Life ✧</h2>
+            
+            <div class="form-group">
+                <label for="current_city">Current City</label>
+                <input type="text" id="current_city" name="current_city" required
+                       placeholder="Where do you currently live?">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="occupation">Occupation</label>
+                    <input type="text" id="occupation" name="occupation" required
+                           placeholder="Your current profession">
+                </div>
+                
+                <div class="form-group">
+                    <label for="education_level">Education Level <span class="optional">(Optional)</span></label>
+                    <select id="education_level" name="education_level">
+                        <option value="">Select level</option>
+                        <option value="high-school">High School</option>
+                        <option value="bachelors">Bachelor's Degree</option>
+                        <option value="masters">Master's Degree</option>
+                        <option value="doctorate">Doctorate</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+            <span class="btn-text">Reveal My Cosmic Path</span>
+            <span class="btn-icon">✧</span>
+        </button>
+    </form>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading-overlay">
+    <div class="loading-content">
+        <div class="cosmic-loader">
+            <div class="orbit orbit-1"><div class="planet"></div></div>
+            <div class="orbit orbit-2"><div class="planet"></div></div>
+            <div class="orbit orbit-3"><div class="planet"></div></div>
+            <div class="sun"></div>
+        </div>
+        <div class="loading-messages">
+            <p class="loading-message active" id="message-1">Analyzing planetary positions...</p>
+            <p class="loading-message" id="message-2">Calculating zodiac influences...</p>
+            <p class="loading-message" id="message-3">Generating personalized astrology report...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
